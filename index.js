@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 const db = async()=>{
   try{
-    await mongoose.connect(`mongodb+srv://sreeyadalla:sreenija@cluster0.lpr3m.mongodb.net/connecting-mongodb?retryWrites=true&w=majority&appName=Cluster0`)
+    await mongoose.connect(`mongodb+srv://sreeyadalla:sreenija@cluster0.lpr3m.mongodb.net/connecting mongodb?retryWrites=true&w=majority&appName=Cluster0`)
     .then(res=>console.log('connected'))
     .catch(e=>
       console.log('failure' ,e)
