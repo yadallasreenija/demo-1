@@ -1,31 +1,14 @@
+require('dotenv').config();
 const express = require('express');
-const { resolve } = require('path');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
 const app = express();
-const port = 3010;
+const PORT = 3010;
 
-app.use(express.static('static'));
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('Connected to database'))
+    .catch(err => console.error(`Database connection error: ${err.message}`));
 
-app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'pages/index.html'));
-});
+app.get('/', (req, res) => res.send('Server is running...'));
 
-
-const db = async()=>{
-  try{
-    await mongoose.connect(`mongodb+srv://sreeyadalla:sreenija@cluster0.lpr3m.mongodb.net/connecting mongodb?retryWrites=true&w=majority&appName=Cluster0`)
-    .then(res=>console.log('connected'))
-    .catch(e=>
-      console.log('failure' ,e)
-    )
-  }
-  catch(e){
-    console.log(e)
-  }
-}
-db()
-
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
